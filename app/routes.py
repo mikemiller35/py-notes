@@ -9,7 +9,7 @@ notes = [
     },
     {
         'id': 2,
-        'title': 'Learn Elastic better'
+        'body': 'Learn Elastic better'
     }
 ]
 
