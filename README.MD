@@ -45,14 +45,14 @@ How about we check all of the notes we currently have
 
 ```
 $ curl http://127.0.0.1:5000/api/notes
-{"notes":[{"body":"Buy car parts","id":1},{"id":2,"title":"Learn Elastic better"}]}
+{"notes":[{"body":"Buy car parts","id":1},{"id":2,"body":"Learn Elastic better"}]}
 ```
 
 Hey now, that's better; but I only want note 2?
 
 ```
 $ curl http://127.0.0.1:5000/api/notes/2
-{"note":{"id":2,"title":"Learn Elastic better"}}
+{"note":{"id":2,"body":"Learn Elastic better"}}
 ```
 
 But I wanna add my own note, Mike!  I've got you covered
