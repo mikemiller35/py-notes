@@ -38,7 +38,7 @@ def get_notes():
 def get_note(note_id):
     note = [note for note in notes if note['id'] == note_id]
     if len(note) == 0:
-        abort(404)
+        return make_response(jsonify({'error': 'Not a valid ID'}), 404)
     return jsonify({'note': note[0]})
 
 
