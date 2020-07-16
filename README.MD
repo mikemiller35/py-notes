@@ -4,7 +4,7 @@ This is just a tech assesment, that I decided to do in Flask; rather than Java.
 
 I like Python and Flask, why not.
 
-This isn't perfect, but I did it in under 45 minutes ~
+This isn't perfect, but I did it in under 45 minutes (API part) ~
 
 ## How do I set this up?
 
@@ -70,3 +70,19 @@ Date: Thu, 16 Jul 2020 01:30:36 GMT
 $ curl http://127.0.0.1:5000/api/notes/3
 {"note":{"body":"Listen to more DMB!","id":3}}
 ```
+
+---
+
+## But wait, there's a UI too!
+
+So now that we have that API, we wanna do something with it!
+
+So I decided to use Vue.js, as it's pretty fast to get up and running; as with Flask.
+
+
+Move into the `client/` directory, run a `npm install` and then `npm run serve`
+
+You then should be up and running!  Try it!
+
+![Notes UI 0](.github/images/screenshot0.png)
+![Notes UI 1](.github/images/screenshot1.png)
