@@ -1,14 +1,14 @@
 # What the hell is this
 
-This is just a tech assesment, that I decided to do in Flask; rather than Java.
+This is just a tech assesment, that I decided to do in Flask; rather than Java for the api portion. I did the front end with VusJs
 
-I like Python and Flask, why not.
+I like Python and Flask, why not. And wanted some VueJs hands on.
 
-This isn't perfect, but I did it in under 45 minutes (API part) ~
+This isn't perfect, but I did the core api work rather quickly. Added on delete ability after the fact.
 
 ## How do I set this up?
 
-I would first get a Python3 venv up and running
+I would first get a Python3 venv up and running. My venv here is on Python 3.8.4
 
 `python3 -m venv venv`
 
@@ -71,6 +71,19 @@ $ curl http://127.0.0.1:5000/api/notes/3
 {"note":{"body":"Listen to more DMB!","id":3}}
 ```
 
+How can I delete notes?
+
+```
+$ curl http://127.0.0.1:5000/api/notes
+{"notes":[{"body":"Learn Elastic better","id":2},{"body":"Get more sleep","id":4}]}
+
+$ curl -XDELETE http://127.0.0.1:5000/api/notes/4
+{"message":"Note removed!","status":"OK"}
+
+$ curl http://127.0.0.1:5000/api/notes
+{"notes":[{"body":"Learn Elastic better","id":2}]}
+```
+
 ---
 
 ## But wait, there's a UI too!
@@ -79,6 +92,7 @@ So now that we have that API, we wanna do something with it!
 
 So I decided to use Vue.js, as it's pretty fast to get up and running; as with Flask.
 
+Make sure the Flask backend is running before you startup VueJs
 
 Move into the `client/` directory, run a `npm install` and then `npm run serve`
 
@@ -86,3 +100,10 @@ You then should be up and running!  Try it!
 
 ![Notes UI 0](.github/images/screenshot0.png)
 ![Notes UI 1](.github/images/screenshot1.png)
+
+
+---
+
+## Todo
+
+- [ ] Make the Vue componenets reference a system variable for the api stuff, to Dockerize.

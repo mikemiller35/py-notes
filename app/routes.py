@@ -53,3 +53,24 @@ def add_note():
     }
     notes.append(note)
     return jsonify({'note': note}), 201
+
+
+# Removing a note
+@app.route('/api/notes/<int:note_id>', methods=['DELETE'])
+def delete_note(note_id):
+    note = [note for note in notes if note['id'] == note_id]
+    if len(note) == 0:
+        return make_response(jsonify({'error': 'Not a valid ID'}), 404)
+    response = {'status': 'OK'}
+    remove_note(note_id)
+    response['message'] = 'Note removed!'
+    return jsonify(response)
+
+
+# Delete helper
+def remove_note(note_id):
+    for note in notes:
+        if note['id'] == note_id:
+            notes.remove(note)
+            return True
+    return False

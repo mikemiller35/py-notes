@@ -5,6 +5,15 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "NPM: VueJs",
+            "type": "node",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/client",
+            "runtimeExecutable": "npm",
+            "runtimeArgs": ["run", "serve", "--fix"],
+            "port": 8080
+          },
+        {
             "name": "Python: Flask",
             "type": "python",
             "request": "launch",

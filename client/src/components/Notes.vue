@@ -21,7 +21,12 @@
               <td>{{ note.body }}</td>
               <td>
                 <div class="btn-group" role="group">
-                  <!-- <button type="button" class="btn btn-danger btn-sm">Delete</button> -->
+                  <button
+                    type="button"
+                    class="btn btn-danger btn-sm"
+                    @click="onDeleteNote(note)">
+                    Delete
+                  </button>
                 </div>
               </td>
             </tr>
@@ -90,6 +95,23 @@
           this.getNotes();
         });
       },
+      removeNote(noteID) {
+        const path = `http://localhost:5000/api/notes/${noteID}`;
+        axios.delete(path)
+          .then(() => {
+            this.getNotes();
+            this.message = 'Note removed!';
+            this.showMessage = true;
+          })
+          .catch((error) => {
+            // eslint-disable-next-line
+            console.error(error);
+            this.getNotes();
+          });
+      },
+      onDeleteNote(note) {
+        this.removeNote(note.id);
+      },
       initForm() {
         this.addNoteForm.body = '';
       },
@@ -108,8 +130,8 @@
         this.initForm();
       },
     },
-    created() {
-      this.getNotes();
-    },
-  };
+      created() {
+        this.getNotes();
+      },
+    };
 </script>
