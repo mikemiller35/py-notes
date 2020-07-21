@@ -9,6 +9,9 @@
             "type": "node",
             "request": "launch",
             "cwd": "${workspaceFolder}/client",
+            "env": {
+                "VUE_APP_FLASK_API": "127.0.0.1"
+              },
             "runtimeExecutable": "npm",
             "runtimeArgs": ["run", "serve", "--fix"],
             "port": 8080
