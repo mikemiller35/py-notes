@@ -83,4 +83,4 @@ def remove_note(note_id):
 
 # The API route defined
 api.add_resource(NotesMain, '/api/notes', endpoint='notes')
-api.add_resource(NotesHandler, '/api/notes/<int:id>', endpoint='task')
+api.add_resource(NotesHandler, '/api/notes/<int:id>', endpoint='note')
