@@ -1,6 +1,6 @@
-from flask import abort, make_response, request
-from flask.json import jsonify
-from app import app
+from flask import abort, make_response, request, jsonify
+from flask_restful import Resource, reqparse, fields, marshal
+from app import app, api
 
 notes = [
     {
@@ -12,6 +12,11 @@ notes = [
         'body': 'Learn Elastic better'
     }
 ]
+
+note_fields = {
+    'id': fields.String,
+    'body': fields.String
+}
 
 
 # So nothing explodes when we don't find a note
@@ -25,47 +30,48 @@ def not_found(error):
 def index():
     return "You're not looking for me...Use the api kid!"
 
+# NotesMain class - Handles new notes and getting all notes
+class NotesMain(Resource):
+    def __init__(self):
+        self.reqparse = reqparse.RequestParser()
+        self.reqparse.add_argument('body', type=str, default="", location='json')
+        super(NotesMain, self).__init__()
 
-# API Goodness
-# Get ALL notes
-@app.route('/api/notes', methods=['GET'])
-def get_notes():
-    return jsonify({'notes': notes})
+    def get(self):
+        return jsonify({'notes': notes})
 
+    def post(self):
+        if not request.json or not 'body' in request.json:
+            abort(400)
+        note = {
+            'id': notes[-1]['id'] + 1,
+            'body': request.json['body']
+        }
+        notes.append(note)
+        return {'note': marshal(note, note_fields)}, 201
 
-# Get a particular note
-@app.route('/api/notes/<int:note_id>', methods=['GET'])
-def get_note(note_id):
-    note = [note for note in notes if note['id'] == note_id]
-    if len(note) == 0:
-        return make_response(jsonify({'error': 'Not a valid ID'}), 404)
-    return jsonify({'note': note[0]})
-
-
-# Adding a note
-@app.route('/api/notes', methods=['POST'])
-def add_note():
-    if not request.json or not 'body' in request.json:
-        abort(400)
-    note = {
-        'id': notes[-1]['id'] + 1,
-        'body': request.json['body']
-    }
-    notes.append(note)
-    return jsonify({'note': note}), 201
-
-
-# Removing a note
-@app.route('/api/notes/<int:note_id>', methods=['DELETE'])
-def delete_note(note_id):
-    note = [note for note in notes if note['id'] == note_id]
-    if len(note) == 0:
-        return make_response(jsonify({'error': 'Not a valid ID'}), 404)
-    response = {'status': 'OK'}
-    remove_note(note_id)
-    response['message'] = 'Note removed!'
-    return jsonify(response)
-
+# NotesHandler class handles individual notes
+class NotesHandler(Resource):
+    def __init__(self):
+        self.reqparse = reqparse.RequestParser()
+        self.reqparse.add_argument('id', type=int, location='json')
+        self.reqparse.add_argument('body', type=str, default="", location='json')
+        super(NotesHandler, self).__init__()
+    
+    def get(self, id):
+        note = [note for note in notes if note['id'] == id]
+        if len(note) == 0:
+            return make_response(jsonify({'error': 'Not a valid ID'}), 404)
+        return jsonify({'note': note[0]})
+    
+    def delete(self, id):
+        note = [note for note in notes if note['id'] == id]
+        if len(note) == 0:
+            return make_response(jsonify({'error': 'Not a valid ID'}), 404)
+        response = {'status': 'OK'}
+        remove_note(id)
+        response['message'] = 'Note removed!'
+        return jsonify(response)
 
 # Delete helper
 def remove_note(note_id):
@@ -74,3 +80,7 @@ def remove_note(note_id):
             notes.remove(note)
             return True
     return False
+
+# The API route defined
+api.add_resource(NotesMain, '/api/notes', endpoint='notes')
+api.add_resource(NotesHandler, '/api/notes/<int:id>', endpoint='task')

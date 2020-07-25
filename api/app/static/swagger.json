@@ -1,0 +1,15 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "description": "Notes App Api",
+      "version": "1.0.0",
+      "title": "Notes App",
+      "contact": {
+        "email": "mike@levelsbeyond.com"
+      },
+      "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT"
+      }
+    }
+  }
