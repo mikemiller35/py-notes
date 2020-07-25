@@ -30,6 +30,7 @@ def not_found(error):
 def index():
     return "You're not looking for me...Use the api kid!"
 
+
 # NotesMain class - Handles new notes and getting all notes
 class NotesMain(Resource):
     def __init__(self):
@@ -49,6 +50,7 @@ class NotesMain(Resource):
         }
         notes.append(note)
         return {'note': marshal(note, note_fields)}, 201
+
 
 # NotesHandler class handles individual notes
 class NotesHandler(Resource):
@@ -73,6 +75,7 @@ class NotesHandler(Resource):
         response['message'] = 'Note removed!'
         return jsonify(response)
 
+
 # Delete helper
 def remove_note(note_id):
     for note in notes:
@@ -80,6 +83,7 @@ def remove_note(note_id):
             notes.remove(note)
             return True
     return False
+
 
 # The API route defined
 api.add_resource(NotesMain, '/api/notes', endpoint='notes')

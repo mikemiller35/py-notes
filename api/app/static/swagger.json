@@ -6,10 +6,6 @@
       "title": "Notes App",
       "contact": {
         "email": "mike@levelsbeyond.com"
-      },
-      "license": {
-        "name": "MIT",
-        "url": "https://opensource.org/licenses/MIT"
       }
     }
   }
