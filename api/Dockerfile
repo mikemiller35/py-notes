@@ -1,11 +1,10 @@
 # Build Stage
 FROM python:3.8.4-alpine3.11 as builder
-RUN apk add --update python3-dev
+RUN apk add --update python3-dev gcc build-base
 COPY requirements.txt /code/requirements.txt
 WORKDIR /code
 RUN pip install --upgrade pip; pip install --user -r requirements.txt
-COPY . app/
-COPY notes.py notes.py
+COPY . .
 
 # put-it-all-together Stage
 FROM python:3.8.4-alpine3.11 as app

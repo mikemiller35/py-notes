@@ -1,0 +1,10 @@
+version: "3"
+services:
+  client:
+    image: mmillerlb/notes-vue:latest
+    ports:
+      - "8080:8080"
+  api:
+    image: mmillerlb/notes-flask
+    ports:
+      - "5000:5000"

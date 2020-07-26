@@ -107,11 +107,35 @@ You then should be up and running!  Try it!
 
 `:5000/api/v1.0/swagger`
 
+---
+
+## Docker Stuff
+
+This does have a docker setup ~
+
+- Build the Docker images (Dockerfiles in both api/ and client/)
+- Tag the images to whatever you like, make sure the tags match up with the docker-compose file
+
+```
+$ docker images
+REPOSITORY              TAG                 IMAGE ID            CREATED             SIZE
+mmillerlb/notes-vue     latest              c37e6e553113        29 seconds ago      1.13GB
+mmillerlb/notes-flask   latest              6345ce036f7d        2 hours ago         102MB
+```
+
+- Run it (The node image is a bit chunky, can thin that out later with a build step)
+
+```
+$ docker-compose -f docker-compose.yml up -d
+Creating network "notesapp_default" with the default driver
+Creating notesapp_client_1 ... done
+Creating notesapp_api_1    ... done
+```
 
 ---
 
 ## Todo
 
 - [X] Make the Vue componenets reference a system variable for the api stuff, to Dockerize.
-- [ ] Need to get docker compse done
+- [X] Need to get docker compse done
 - [ ] Clean up the code a bit more.
