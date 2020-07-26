@@ -1,23 +1,18 @@
-from flask import Flask
-from flask_restful import Api
+from flask import Flask, Blueprint
+from flask_restx import Api
 from flask_cors import CORS
-from flask_swagger_ui import get_swaggerui_blueprint
 
 # Get the app initialized and set CORS rules
 app = Flask(__name__)
-api = Api(app)
-CORS(app, resources={r'/*': {'origins': '*'}})
-
-# Swagger Stuff
-SWAGGER_URL = '/swagger'
-API_URL = '/static/swagger.json'
-SWAGGERUI_BLUEPRINT = get_swaggerui_blueprint(
-    SWAGGER_URL,
-    API_URL,
-    config={
-        'app_name': "Notes App Api"
-    }
+blueprint = Blueprint("api", __name__, url_prefix="/api/v1.0")
+api = Api(
+    blueprint,
+    title="Notes App API",
+    version="v1.0",
+    description="RESTful API for the Notes app",
+    doc="/swagger",
 )
-app.register_blueprint(SWAGGERUI_BLUEPRINT, url_prefix=SWAGGER_URL)
+app.register_blueprint(blueprint)
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 from app import routes

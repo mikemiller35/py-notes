@@ -74,7 +74,7 @@
       getNotes() {
         //const path = "http://localhost:5000/api/notes";
         const host = process.env.VUE_APP_FLASK_API;
-        const path = "http://" + host + ":5000/api/notes";
+        const path = "http://" + host + ":5000/api/v1.0/notes";
         axios
           .get(path)
           .then(res => {
@@ -88,7 +88,7 @@
       addNote(payload) {
         //const path = 'http://localhost:5000/api/notes';
         const host = process.env.VUE_APP_FLASK_API;
-        const path = "http://" + host + ":5000/api/notes";
+        const path = "http://" + host + ":5000/api/v1.0/notes";
         axios.post(path, payload)
           .then(() => {
             this.getNotes();
@@ -102,7 +102,7 @@
       removeNote(noteID) {
         //const path = `http://localhost:5000/api/notes/${noteID}`;
         const host = process.env.VUE_APP_FLASK_API;
-        const path = "http://" + host + `:5000/api/notes/${noteID}`;
+        const path = "http://" + host + `:5000/api/v1.0/notes/${noteID}`;
         axios.delete(path)
           .then(() => {
             this.getNotes();

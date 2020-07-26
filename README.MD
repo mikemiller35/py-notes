@@ -1,5 +1,7 @@
 # What the hell is this
 
+<a href="https://github.com/psf/black"><img alt="Code style: black" src="https://img.shields.io/badge/code%20style-black-000000.svg"></a>
+
 This is just a tech assesment, that I decided to do in Flask; rather than Java for the api portion. I did the front end with VusJs
 
 I like Python and Flask, why not. And wanted some VueJs hands on.
@@ -44,21 +46,21 @@ You're not looking for me...Use the api kid!
 How about we check all of the notes we currently have
 
 ```
-$ curl http://127.0.0.1:5000/api/notes
+$ curl http://127.0.0.1:5000/api/v1.0/notes
 {"notes":[{"body":"Buy car parts","id":1},{"id":2,"body":"Learn Elastic better"}]}
 ```
 
 Hey now, that's better; but I only want note 2?
 
 ```
-$ curl http://127.0.0.1:5000/api/notes/2
+$ curl http://127.0.0.1:5000/api/v1.0/notes/2
 {"note":{"id":2,"body":"Learn Elastic better"}}
 ```
 
 But I wanna add my own note, Mike!  I've got you covered
 
 ```
-$ curl -i -H "Content-Type: application/json" -X POST -d '{"body":"Listen to more DMB!"}' http://localhost:5000/api/notes
+$ curl -i -H "Content-Type: application/json" -X POST -d '{"body":"Listen to more DMB!"}' http://localhost:5000/api/v1.0/notes
 HTTP/1.0 201 CREATED
 Content-Type: application/json
 Content-Length: 47
@@ -67,20 +69,20 @@ Date: Thu, 16 Jul 2020 01:30:36 GMT
 
 {"note":{"body":"Listen to more DMB!","id":3}}
 
-$ curl http://127.0.0.1:5000/api/notes/3
+$ curl http://127.0.0.1:5000/api/v1.0/notes/3
 {"note":{"body":"Listen to more DMB!","id":3}}
 ```
 
 How can I delete notes?
 
 ```
-$ curl http://127.0.0.1:5000/api/notes
+$ curl http://127.0.0.1:5000/api/v1.0/notes
 {"notes":[{"body":"Learn Elastic better","id":2},{"body":"Get more sleep","id":4}]}
 
-$ curl -XDELETE http://127.0.0.1:5000/api/notes/4
+$ curl -XDELETE http://127.0.0.1:5000/api/v1.0/notes/4
 {"message":"Note removed!","status":"OK"}
 
-$ curl http://127.0.0.1:5000/api/notes
+$ curl http://127.0.0.1:5000/api/v1.0/notes
 {"notes":[{"body":"Learn Elastic better","id":2}]}
 ```
 
@@ -101,9 +103,15 @@ You then should be up and running!  Try it!
 ![Notes UI 0](.github/images/screenshot0.png)
 ![Notes UI 1](.github/images/screenshot1.png)
 
+## And Swagger!
+
+`:5000/api/v1.0/swagger`
+
 
 ---
 
 ## Todo
 
-- [ ] Make the Vue componenets reference a system variable for the api stuff, to Dockerize.
+- [X] Make the Vue componenets reference a system variable for the api stuff, to Dockerize.
+- [ ] Need to get docker compse done
+- [ ] Clean up the code a bit more.
