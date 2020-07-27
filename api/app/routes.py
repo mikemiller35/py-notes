@@ -60,7 +60,7 @@ class NotesHandler(Resource):
         return jsonify(response)
 
 
-# Delete helper
+# Delete helper - Need to move this out of routes!
 def remove_note(note_id):
     for note in notes:
         if note["id"] == note_id:
