@@ -113,24 +113,9 @@ You then should be up and running!  Try it!
 
 This does have a docker setup ~
 
-- Build the Docker images (Dockerfiles in both api/ and client/)
-- Tag the images to whatever you like, make sure the tags match up with the docker-compose file
+Run it with `docker-compose -f docker-compose.yml up -d --build`
 
-```
-$ docker images
-REPOSITORY              TAG                 IMAGE ID            CREATED             SIZE
-mmillerlb/notes-vue     latest              c37e6e553113        29 seconds ago      1.13GB
-mmillerlb/notes-flask   latest              6345ce036f7d        2 hours ago         102MB
-```
-
-- Run it (The node image is a bit chunky, can thin that out later with a build step)
-
-```
-$ docker-compose -f docker-compose.yml up -d
-Creating network "notesapp_default" with the default driver
-Creating notesapp_client_1 ... done
-Creating notesapp_api_1    ... done
-```
+To shut it down `docker-compose down`
 
 ---
 

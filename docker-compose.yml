@@ -1,10 +1,16 @@
 version: "3"
 services:
   client:
-    image: mmillerlb/notes-vue:latest
-    ports:
-      - "8080:8080"
-  api:
-    image: mmillerlb/notes-flask
+    depends_on: 
+      - api
+    build:
+      context: ./api
+      dockerfile: Dockerfile
     ports:
       - "5000:5000"
+  api:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"

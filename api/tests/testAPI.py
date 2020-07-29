@@ -9,7 +9,7 @@ def test_add_note():
     response = app.test_client().post(
         "/api/v1.0/notes",
         data=json.dumps({"body": "Thnk of more test notes!"}),
-        content_type="application/json"
+        content_type="application/json",
     )
 
     assert response.status_code == 201
